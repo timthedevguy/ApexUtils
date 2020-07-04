@@ -59,5 +59,9 @@ default 'HELP' button.
 
 ![FlatMapMonkey](https://i.imgur.com/252sRSk.png)
 
+And a video of it in action!
+
+[![FlatMapMonkeyVideo](https://img.youtube.com/vi/0U_9Ao75RNM/0.jpg)](https://www.youtube.com/watch?v=0U_9Ao75RNM)
+
 Enjoy !!! :)
 
