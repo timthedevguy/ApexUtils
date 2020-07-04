@@ -26,7 +26,7 @@
     // Fired when PrUnTools Menu is ready (Occurs after 5s of page load)
     document.addEventListener('PrUnTools_Loaded', () => {
 
-        // Add new Menu
+        // Add new Menu Item
         apex.addMenuItem('bg-map', 'FMAP', 'Flat Map', map_click);
         apex.addMenuItem('help', 'HELP', 'PrUn Tools Help', help_click);
     });
