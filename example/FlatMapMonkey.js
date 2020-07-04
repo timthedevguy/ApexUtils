@@ -7,7 +7,7 @@
 // @match        https://apex.prosperousuniverse.com/
 // @grant        none
 // @require  http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
-// @require  https://cdn.jsdelivr.net/gh/binarygod/apexutils@0.0.1/apexutils.js
+// @require  https://cdn.jsdelivr.net/gh/binarygod/apexutils@0.0.1/dist/apexutils.min.js
 // @require  https://unpkg.com/leaflet@1.6.0/dist/leaflet.js
 // ==/UserScript==
 
