@@ -34,15 +34,8 @@ const alertTemplate = `
     `;
 
 class ApexUtils {
-
-    /**
-     * Change the PrUnTools_ScreenChanged event delay, will wait this number of milliseconds to fire event
-     * after detecting the change.
-     * @type {number}
-     */
-    screenChangeDelay = 750;
-
     constructor() {
+        this._screenChangeDelay = 750;
     }
     // Load the PrUnTools Menu Block
     /**
@@ -75,7 +68,7 @@ class ApexUtils {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this.screenChangeDelay);
+                    }, this._screenChangeDelay);
                 });
 
                 // Notify load is complete
@@ -83,6 +76,14 @@ class ApexUtils {
 
             }, 5000);
         }
+    }
+
+    get screenChangeDelay() {
+        return this._screenChangeDelay;
+    }
+
+    set screenChangeDelay(delayInMilliseconds) {
+        this._screenChangeDelay = delayInMilliseconds;
     }
 
     /**
@@ -200,25 +201,25 @@ class ApexUtils {
      */
     help() {
         return `<div style="padding: 0 20px;">
-                <h2>Welcome to PrUnTools</h2>
-                <h3>What is PrUnTools</h3>
+                <h2>Welcome to ApexUtils</h2>
+                <h3>What is ApexUtils</h3>
                 <p>PrUnTools started as a private set of tools that I wrote with another member of the community. I then 
-                noticed that I could seperate the Apex code in to it's own reusable library.  This would allow me to keep
+                noticed that I could seperate the Apex code in to it's own reusable library which resulted in ApexUtils.  This would allow me to keep
                  my tools and provide a framework for others to use to create their own.</p>
-                <p>PrUnTools is a set of utility functions designed to be used by TamperMonkey scripts (or similar products) 
+                <p>ApexUtils is a set of utility functions designed to be used by TamperMonkey scripts (or similar products) 
                  to interact with the APEX interface in a safe way.  The utility also loads CSS that mimics the style of
                   APEX but with class names you can use in your own HTML.</p>
-                <h3>What PrUnTools is NOT</h3>
-                <p>PrUnTools is NOT a framework for creating Bots.  It performs only one automatic click to create a 
+                <h3>What ApexUtils is NOT</h3>
+                <p>ApexUtils is NOT a framework for creating Bots.  It performs only one automatic click to create a 
                 new buffer window.  I have personally showed this feature to the Devs and they are ok with it.  <strong>You</strong> are
                  responsible for what  you create with the tool.</p>
                 <h3>Is this against ToS</h3>
-                <p>No. PrUnTools itself only reads and adds content to the Client.  It does not send data to the server or
-                automate client tasks.  PrUnTools interfaces with the DOM elements of the page and does not attempt to 
+                <p>No. ApexUtils itself only reads and adds content to the Client.  It does not send data to the server or
+                automate client tasks.  ApexUtils interfaces with the DOM elements of the page and does not attempt to 
                 interact with the Javascript in the page, all modifications are done using it's own Javascript utilizing 
                 jQuery.</p>
-                <h3>What can I use PrUnTools for</h3>
-                <p>PrUnTools can be used to make anything that would be useful on the client.  For example the included FMAP 
+                <h3>What can I use ApexUtils for</h3>
+                <p>ApexUtils can be used to make anything that would be useful on the client.  For example the included FMAP 
                 utility used to show the Flat Map of the universe.</p>
                 <h3>Resources</h3>
                 <ul>
