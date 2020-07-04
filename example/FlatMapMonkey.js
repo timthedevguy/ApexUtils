@@ -32,7 +32,7 @@
     });
 
     function map_click() {
-        apex.showBuffer("Flat Map", 450,450, '<div id="mapid" style="width:100%;height:100%;"></div>');
+        apex.showBuffer("Flat Map", 'APEXUTILS',450,450, '<div id="mapid" style="width:100%;height:100%;"></div>');
 
         var map = L.map('mapid', {
             crs: L.CRS.Simple
@@ -43,6 +43,6 @@
     }
 
     function help_click() {
-        apex.showBuffer("Help", 500,600, apex.help);
+        apex.showBuffer("Help", 'APEXUTILS', 500,500, apex.help);
     }
 })();
