@@ -57,5 +57,7 @@ In this example I have included a zoomable/navigable flat map 'FMAP' of the
 universe made by Ausecko @ ausecko.com (used with permission) and the
 default 'HELP' button.
 
+![FlatMapMonkey](https://i.imgur.com/252sRSk.png)
+
 Enjoy !!! :)
 
