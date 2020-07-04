@@ -65,3 +65,14 @@ And a video of it in action!
 
 Enjoy !!! :)
 
+### P.S.
+I will warn you, I am **NOT** a JS developer.  This is the first thing
+I have written in JS other than like drop down menus and such for bank
+ websites.  I used principles from my many other languages and I know JS
+ just sometimes doesn't fit the same 'rules'.
+ 
+ So, this means if you are looking at my code and thing, wow, this guy
+  is an idiot for doing it like this or this then please, reach out, do 
+  a patch, or pull request or offer up some knowledge on a better way. I 
+  am open to all feedback.
+
