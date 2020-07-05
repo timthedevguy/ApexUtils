@@ -174,6 +174,7 @@ table.PrUnTools_Table
     font-family: 'Droid Sans', sans-serif;
     font-size: 11px;
     line-height: 1.1;
+    color: #BBB;
 }
 table.PrUnTools_Table th, table.PrUnTools_Table td
 {
@@ -224,6 +225,10 @@ input.PrUnTools_Control:focus
     outline: none;
     border-bottom: 1px solid #F7A600;
 }
+table.PrUnTools_Table td p
+{
+    margin: 5px 0;
+}
 .center-cell
 {
     text-align: center;
@@ -231,6 +236,54 @@ input.PrUnTools_Control:focus
 .accounting-cell
 {
     text-align: right;
+}
+.top-border-cell
+{
+    border-top: 1px solid #2B485A;
+    border-bottom: 1px solid #2B485A;
+}
+/*TABLE Label Styles*/
+table.PrUnTools_Table td.PrUnTools_Label.PrUnTools_Label
+{
+    /*border: none;*/
+    font-weight: bold;
+    line-height: 11px;
+    border-right: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+}
+table.PrUnTools_Table td.PrUnTools_Label.yellow
+{
+    background-color: #F7A600;
+    color: black;
+}
+table.PrUnTools_Table td.PrUnTools_Label_Input.yellow
+{
+    background-color: #2D2920;
+    color: black;
+    text-align: right;
+    border-right: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+}
+table.PrUnTools_Table td.PrUnTools_Label.blue
+{
+    background-color: #3FA2DE;
+    color: black;
+    line-height: 17px;
+}
+table.PrUnTools_Table td.PrUnTools_Label_Output.blue
+{
+    background-color: #23282B;
+    color: black;
+    text-align: right;
+    border-right: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+}
+table.PrUnTools_Table td.PrUnTools_Label_Output.blue span
+{
+    padding: 2px 5px;
+    line-height: 17px;
+    background-color: #26353E;
+    color: #BBB;
 }
 /*Alert Box Styles*/
 .PrUnTools_Alert_Overlay
