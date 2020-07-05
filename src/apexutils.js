@@ -87,6 +87,35 @@ class ApexUtils {
     }
 
     /**
+     * Used for adding .on EventHandlers for dynamicly added Menu items
+     * @returns {string}
+     */
+    get menuAnchor() {
+        return '[class^="Frame__sidebar"]';
+    }
+
+    get state() {
+        // https://github.com/rain9441/prun-data-extraction/blob/master/src/services/redux-store-harness.ts
+        let root = document.getElementById('container');
+
+        if (!root) {
+            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find container element, this may not be running on APEX.", 350,180,'red');
+        }
+        root = root.children[0];
+        if (!root) {
+            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find child of root container element, this may not be running on APEX.", 350,180,'red');
+        }
+
+        var reactPropertyName = Object.keys(root).filter(x => x.substring(0,5) == "__rea")[0];
+        if (!reactPropertyName)
+        {
+            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find react instance property name, this may not be running on APEX.", 350,180,'red');
+        }
+
+        return root[reactPropertyName]._currentElement._owner._context.store.getState().toJS();
+    }
+
+    /**
      * Adds new Menu Item to the PrUnTools Menu block
      * @param {string} id Element ID
      * @param {string} text Button Text
@@ -113,14 +142,6 @@ class ApexUtils {
         if(handler !== undefined) {
             $(menuItem).click(handler);
         }
-    }
-
-    /**
-     * Used for adding .on EventHandlers for dynamicly added Menu items
-     * @returns {string}
-     */
-    get menuAnchor() {
-        return '[class^="Frame__sidebar"]';
     }
 
     /**
