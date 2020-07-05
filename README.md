@@ -24,6 +24,8 @@ This is where ApexUtil comes in, I've determined what I think is a good
 and safe way to interact with Apex is and then put that code in to a
 library for you to use.
 
+Check out [Setup Dev Environment](https://github.com/binarygod/ApexUtils/wiki/Setup-Dev-Environment)
+
 ### What can ApexUtils do?
 Currently ApexUtils has the ability to
 * Create a menu block in left menu and populate it with menu items 
