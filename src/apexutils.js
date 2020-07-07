@@ -36,8 +36,8 @@ const alertTemplate = `
 class ApexUtils {
     constructor() {
         this._screenChangeDelay = 750;
+        this._store = {};
     }
-    // Load the PrUnTools Menu Block
     /**
      * Loads the PrUnTools Menu Block to the page
      * @param additionalStyles - Additional styles to add to the page
@@ -78,12 +78,28 @@ class ApexUtils {
         }
     }
 
+    /**
+     * Gets Screen Change detection delay in milliseconds, default is 750
+     * @returns {number}
+     */
     get screenChangeDelay() {
         return this._screenChangeDelay;
     }
 
+    /**
+     * Sets Screen Change detection delay in milliseconds, default is 750
+     * @param delayInMilliseconds - New delay value
+     */
     set screenChangeDelay(delayInMilliseconds) {
         this._screenChangeDelay = delayInMilliseconds;
+    }
+
+    /**
+     * Simple Dictionary data store to share information between scripts
+     * @returns {{}}
+     */
+    get store() {
+        return this._store;
     }
 
     /**
@@ -94,6 +110,10 @@ class ApexUtils {
         return '[class^="Frame__sidebar"]';
     }
 
+    /**
+     * Gets the NEXT STATE information from the Redux Store
+     * @returns {*} - JSON Object containing State information
+     */
     get state() {
         // https://github.com/rain9441/prun-data-extraction/blob/master/src/services/redux-store-harness.ts
         let root = document.getElementById('container');
@@ -142,6 +162,37 @@ class ApexUtils {
         if(handler !== undefined) {
             $(menuItem).click(handler);
         }
+    }
+
+    flashMenuItem(id, color, timeout= 1000) {
+        // Get Indicator object
+        let indicator = $('#' + id).parent().children("DIV.PrUnTools_Menu_Item_Indicator")
+        let classes = indicator.attr('class').split(/\s+/);
+
+        // Remove extra classes
+        classes.forEach((item) => {
+           if(item != 'PrUnTools_Menu_Item_Indicator') {
+               indicator.removeClass(item);
+           }
+        });
+
+        // Add pulsing class
+        indicator.addClass('rapid-pulse').addClass(color);
+
+        // Add timeout
+        setTimeout(function() {
+
+            // Remove pulsing class
+            indicator.removeClass('rapid-pulse').removeClass(color);
+
+            // Add original classes back
+            classes.forEach((item) => {
+                if(item != 'PrUnTools_Menu_Item_Indicator') {
+                    indicator.addClass(item);
+                }
+            });
+
+        }, timeout);
     }
 
     /**
