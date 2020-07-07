@@ -35,8 +35,9 @@ const alertTemplate = `
 
 class ApexUtils {
     constructor() {
-        this._store = {};
-        this._store['screenChangeDelay'] = 750;
+        if(this.screenChangeDelay == null) {
+            this.screenChangeDelay = 750;
+        }
     }
     /**
      * Loads the PrUnTools Menu Block to the page
@@ -68,7 +69,7 @@ class ApexUtils {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this._store['screenChangeDelay']);
+                    }, this.screenChangeDelay);
                 });
 
                 // Notify load is complete
@@ -83,7 +84,7 @@ class ApexUtils {
      * @returns {number}
      */
     get screenChangeDelay() {
-        return this._store['screenChangeDelay'];
+        return localStorage.getItem('screenChangeDelay');
     }
 
     /**
@@ -91,15 +92,25 @@ class ApexUtils {
      * @param delayInMilliseconds - New delay value
      */
     set screenChangeDelay(delayInMilliseconds) {
-        this._store['screenChangeDelay'] = delayInMilliseconds;
+        localStorage.setItem('screenChangeDelay', delayInMilliseconds);
     }
 
     /**
-     * Simple Dictionary data store to share information between scripts
-     * @returns {{}}
+     * Get an ApexUtils specific value from LocalStorage
+     * @param key - Key
+     * @returns {var} - Item
      */
-    get store() {
-        return this._store;
+    getValue(key) {
+        return localStorage.getItem('apexutils.'+key);
+    }
+
+    /**
+     * Set an ApexUtils specific value from LocalStorage
+     * @param key - Item Key
+     * @param value - Item
+     */
+    setValue(key, value) {
+        localStorage.setItem('apexutils.'+key, value);
     }
 
     /**
