@@ -43,10 +43,7 @@ class ApexUtils {
      * @param additionalStyles - Additional styles to add to the page
      */
     load(additionalStyles='') {
-        console.log(this._screenChangeDelay);
-        console.log(this._store);
-        this._store['test'] = "TEST";
-        console.log(this._store);
+
         if($('BODY').hasClass('PrUnTools')) {
             // Add new Styles
             $('HEAD').append($('<STYLE>').html(additionalStyles));
@@ -102,7 +99,6 @@ class ApexUtils {
      * @returns {{}}
      */
     get store() {
-        this._store['test'] = 'test';
         return this._store;
     }
 
