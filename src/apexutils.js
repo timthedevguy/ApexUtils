@@ -35,8 +35,8 @@ const alertTemplate = `
 
 class ApexUtils {
     constructor() {
-        this._screenChangeDelay = 750;
         this._store = {};
+        this._store['screenChangeDelay'] = 750;
     }
     /**
      * Loads the PrUnTools Menu Block to the page
@@ -68,7 +68,7 @@ class ApexUtils {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this._screenChangeDelay);
+                    }, this._store['screenChangeDelay']);
                 });
 
                 // Notify load is complete
@@ -83,7 +83,7 @@ class ApexUtils {
      * @returns {number}
      */
     get screenChangeDelay() {
-        return this._screenChangeDelay;
+        return this._store['screenChangeDelay'];
     }
 
     /**
@@ -91,7 +91,7 @@ class ApexUtils {
      * @param delayInMilliseconds - New delay value
      */
     set screenChangeDelay(delayInMilliseconds) {
-        this._screenChangeDelay = delayInMilliseconds;
+        this._store['screenChangeDelay'] = delayInMilliseconds;
     }
 
     /**
