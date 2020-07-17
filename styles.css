@@ -191,6 +191,7 @@ table.PrUnTools_Table tbody td
 {
     padding: 2px 8px;
     border-left: 1px solid #2B485A;
+    line-height: 17px;
 }
 table.PrUnTools_Table tbody td:first-child
 {
@@ -208,6 +209,42 @@ table.PrUnTools_Table tr.totals
 {
     border-top: 1px solid #2B485A;
 }
+table.PrUnTools_Table td p
+{
+    margin: 5px 0;
+}
+.center-cell
+{
+    text-align: center;
+}
+.accounting-cell
+{
+    text-align: right;
+}
+.top-border-cell
+{
+    border-top: 1px solid #2B485A;
+    /*border-bottom: 1px solid #2B485A;*/
+}
+.bottom-border-cell
+{
+    border-bottom: 1px solid #2B485A;
+}
+table.PrUnTools_Table tbody td.header-cell
+{
+    background-color:none;
+    border-top: 1px solid #2B485A;
+    border-bottom: 1px solid #2B485A;
+}
+table.PrUnTools_Table tbody td.header-cell:nth-child(odd)
+{
+    background: none;
+}
+table.PrUnTools_Table tbody tr:hover td
+{
+    background-color: rgba(255, 255, 255, 0.15);
+}
+/*Control Styles*/
 input[type="text"].PrUnTools_Control, input[type="number"].PrUnTools_Control
 {
     height: 17px;
@@ -225,22 +262,41 @@ input.PrUnTools_Control:focus
     outline: none;
     border-bottom: 1px solid #F7A600;
 }
-table.PrUnTools_Table td p
+select.PrUnTools_Control
 {
-    margin: 5px 0;
+    height: 17px;
+    line-height: 17px;
+    padding: 0 4px;
+    border: 0;
+    border-bottom: 1px solid #8D6411;
+    background-color: #42361D;
+    color: #BBB;
+    text-align: left;
 }
-.center-cell
+select.PrUnTools_Control:focus
 {
-    text-align: center;
+    outline: none;
+    border-bottom: 1px solid #F7A600;
 }
-.accounting-cell
+button.PrUnTools_Button_Primary
 {
-    text-align: right;
+    display: inline-block;
+    border: none;
+    line-height: 17px;
+    padding: 0 8px;
+    margin: 0;
+    font-size: 11px;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    background-color: #F7A600;
+    border-radius: 2px;
 }
-.top-border-cell
+button.PrUnTools_Button_Primary:hover
 {
-    border-top: 1px solid #2B485A;
-    border-bottom: 1px solid #2B485A;
+    color: #272727;
 }
 /*TABLE Label Styles*/
 table.PrUnTools_Table td.PrUnTools_Label.PrUnTools_Label
@@ -342,4 +398,21 @@ table.PrUnTools_Table td.PrUnTools_Label_Output.blue span
 {
     color: white;
     background-color: #0BAE1C;
+}
+/*Text Styles*/
+td.text-muted, .text-muted
+{
+    color: #505050;
+}
+td.text-green, .text-green
+{
+    color: #1BF63D;
+}
+td.text-red, .text-red
+{
+    color: #EB1E1E;
+}
+td.text-orange, .text-orange
+{
+    color: #E69C07;
 }
