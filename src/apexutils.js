@@ -62,7 +62,7 @@ class ApexUtils {
             setTimeout(() => {
 
                 // Add Menu Toggle Frame
-                $('[class^="Frame__sidebar"] DIV[class^="Frame__toggle__"]:last').after($(menuTemplate));
+                $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
 
                 // Trigger Initial Screen Changed
                 document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
@@ -231,7 +231,8 @@ class ApexUtils {
      */
     showBuffer(title, subtitle, width, height, content) {
         // Create new Buffer
-        $('[class^="Dock__create__"]').click();
+        //$('[class^="Dock__create__"]').click();
+        $('[class="_38GFUZ_bqqfSehlTdlvwGE _2tgF3CjTxcwKdSpZ_motdg _33A_5lETf4HBqwJi_q-jhZ _1vWRpdI8cKNMPyOPnzlXgX"]').click();
 
         // Find the new Buffer
         let buffer = $('DIV[class^="Window__window___"]:not(".PrUnTools_taken") DIV[class^="Tile__selector__"]:first').parent().parent().parent().addClass('PrUnTools_taken');
