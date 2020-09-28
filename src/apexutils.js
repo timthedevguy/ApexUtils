@@ -68,7 +68,7 @@ class ApexUtils {
                 document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
 
                 // Add event for changing of the SCRN field
-                $('body').on('DOMSubtreeModified', 'SPAN[class^="HeadItem__label"]', () => {
+                $('body').on('DOMSubtreeModified', 'SPAN[class="rF4C15Dlkm60tt571SkDj"]', () => {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
@@ -121,7 +121,7 @@ class ApexUtils {
      * @returns {string}
      */
     get menuAnchor() {
-        return '[class^="Frame__sidebar"]';
+        return '[class="_1M1EcDYyJhRT-bBiQgj4Zw"]';
     }
 
     /**
@@ -130,23 +130,8 @@ class ApexUtils {
      */
     get state() {
         // https://github.com/rain9441/prun-data-extraction/blob/master/src/services/redux-store-harness.ts
-        let root = document.getElementById('container');
-
-        if (!root) {
-            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find container element, this may not be running on APEX.", 350,180,'red');
-        }
-        root = root.children[0];
-        if (!root) {
-            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find child of root container element, this may not be running on APEX.", 350,180,'red');
-        }
-
-        var reactPropertyName = Object.keys(root).filter(x => x.substring(0,5) == "__rea")[0];
-        if (!reactPropertyName)
-        {
-            this.showAlertBuffer('State Error', 'PrUnTools', 'Unable to get State', "Unable to find react instance property name, this may not be running on APEX.", 350,180,'red');
-        }
-
-        return root[reactPropertyName]._currentElement._owner._context.store.getState().toJS();
+        // Special Thanks to Rain!!!
+        return document.getElementById('container')._reactRootContainer._internalRoot.current.child.child.child.pendingProps.store.getState().toJS();
     }
 
     /**
@@ -235,23 +220,23 @@ class ApexUtils {
         $('[class="_38GFUZ_bqqfSehlTdlvwGE _2tgF3CjTxcwKdSpZ_motdg _33A_5lETf4HBqwJi_q-jhZ _1vWRpdI8cKNMPyOPnzlXgX"]').click();
 
         // Find the new Buffer
-        let buffer = $('DIV[class^="Window__window___"]:not(".PrUnTools_taken") DIV[class^="Tile__selector__"]:first').parent().parent().parent().addClass('PrUnTools_taken');
+        let buffer = $('DIV[class="_1Gt2vj54dwdsGZMO13RxjN"]:not(".PrUnTools_taken") DIV[class="_86iI4sy8I8Gb9DRZloqFB"]:first').parent().parent().parent().addClass('PrUnTools_taken');
 
         // Remove the buffer input stuff
-        $(buffer).find('DIV[class^="Tile__selector__"]').remove();
-        $(buffer).find('DIV[class^="Tile__controls__"]').remove();
+        $(buffer).find('DIV[class="_86iI4sy8I8Gb9DRZloqFB"]').remove();
+        $(buffer).find('DIV[class="_1mubANzqV2fICrNGnMze0y"]').remove();
 
         // Remove minimize button
-        $(buffer).find('SPAN[class^="Window__close__"]').remove();
+        $(buffer).find('SPAN[class="_3pd4GjlRDJtIK4izuUrc2Q BNTJu1og0XIu3K26V_ddU _33A_5lETf4HBqwJi_q-jhZ _2_LtsZLiGIKxWd_UHEKnY6"]').remove();
 
         // Build the title and frame
         let bufferFrame = bufferTemplate.replace('{{:title}}',title).replace('{{:subtitle}}',subtitle).replace('{{:content}}', content);
 
         // Set window size
-        $(buffer).find('DIV[class^="Window__body__"]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
+        $(buffer).find('DIV[class="_1T3GrusQ2ydTsNKeMaEfPl"]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
 
         // Add Frame
-        $(buffer).find('DIV[class^="Tile__tile__"]').append($(bufferFrame));
+        $(buffer).find('DIV[class="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
     }
 
     /**
@@ -266,18 +251,18 @@ class ApexUtils {
      */
     showAlertBuffer(frame_title, frame_subtitle, alert_title, alert_message, width, height, color='yellow') {
         // Create new Buffer
-        $('[class^="Dock__create__"]').click();
+        $('[class="_38GFUZ_bqqfSehlTdlvwGE _2tgF3CjTxcwKdSpZ_motdg _33A_5lETf4HBqwJi_q-jhZ _1vWRpdI8cKNMPyOPnzlXgX"]').click();
 
         // Find the new Buffer
-        let buffer = $('DIV[class^="Window__window___"]:not(".PrUnTools_taken") DIV[class^="Tile__selector__"]:first')
+        let buffer = $('DIV[class="_1Gt2vj54dwdsGZMO13RxjN"]:not(".PrUnTools_taken") DIV[class="_86iI4sy8I8Gb9DRZloqFB"]:first')
             .parent().parent().parent().addClass('PrUnTools_taken');
 
         // Remove the buffer input stuff
-        $(buffer).find('DIV[class^="Tile__selector__"]').remove();
-        $(buffer).find('DIV[class^="Tile__controls__"]').remove();
+        $(buffer).find('DIV[class="_86iI4sy8I8Gb9DRZloqFB"]').remove();
+        $(buffer).find('DIV[class="_1mubANzqV2fICrNGnMze0y"]').remove();
 
         // Remove minimize button
-        $(buffer).find('SPAN[class^="Window__close__"]').remove();
+        $(buffer).find('SPAN[class="_3pd4GjlRDJtIK4izuUrc2Q BNTJu1og0XIu3K26V_ddU _33A_5lETf4HBqwJi_q-jhZ _2_LtsZLiGIKxWd_UHEKnY6"]').remove();
 
         // Build the Alert
         let alertBox = alertTemplate.replace('{{:alert_title}}', alert_title)
@@ -287,10 +272,10 @@ class ApexUtils {
         let bufferFrame = bufferTemplate.replace('{{:title}}', frame_title).replace('{{:subtitle}}', frame_subtitle).replace('{{:content}}', alertBox);
 
         // Set window size
-        $(buffer).find('DIV[class^="Window__body__"]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
+        $(buffer).find('DIV[class="_1T3GrusQ2ydTsNKeMaEfPl"]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
 
         // Add Frame
-        $(buffer).find('DIV[class^="Tile__tile__"]').append($(bufferFrame));
+        $(buffer).find('DIV[class^="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
     }
 
     /**
