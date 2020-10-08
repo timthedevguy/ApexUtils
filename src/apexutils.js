@@ -75,12 +75,12 @@ class ApexUtils {
                 //     }, this.screenChangeDelay);
                 // });
 
-                new MutationObserver(() => {
-                    // User changed screens, let the screen load and send
-                    setTimeout(() => {
-                        document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this.screenChangeDelay);
-                }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+                // new MutationObserver(() => {
+                //     // User changed screens, let the screen load and send
+                //     setTimeout(() => {
+                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
+                //     }, this.screenChangeDelay);
+                // }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
