@@ -68,12 +68,19 @@ class ApexUtils {
                 document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
 
                 // Add event for changing of the SCRN field
-                $('body').on('DOMSubtreeModified', 'SPAN[class="rF4C15Dlkm60tt571SkDj"]', () => {
+                // $('body').on('DOMSubtreeModified', 'SPAN[class="rF4C15Dlkm60tt571SkDj"]', () => {
+                //     // User changed screens, let the screen load and send
+                //     setTimeout(() => {
+                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
+                //     }, this.screenChangeDelay);
+                // });
+
+                new MutationObserver(() => {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
                     }, this.screenChangeDelay);
-                });
+                }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
