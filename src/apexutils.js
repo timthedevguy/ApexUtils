@@ -85,7 +85,7 @@ class ApexUtils {
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
 
-            }, 5000);
+            }, 15000);
         }
     }
 
