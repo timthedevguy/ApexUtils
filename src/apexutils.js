@@ -72,11 +72,11 @@ class ApexUtils {
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
                     }, this.screenChangeDelay);
-                }).observe($('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last'), {childList: true, subtree: true});
+                }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
-            }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+            }).observe($('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last'), {childList: true, subtree: true});
 
                 // // Add Menu Toggle Frame
                 // $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
