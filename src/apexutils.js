@@ -60,8 +60,7 @@ class ApexUtils {
 
             // Wait 5s for APEX to fully load
             //setTimeout(() => {
-
-                // Add Menu Toggle Frame
+            new MutationObserver(() => {
                 $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
 
                 // Trigger Initial Screen Changed
@@ -73,10 +72,28 @@ class ApexUtils {
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
                     }, this.screenChangeDelay);
-                }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+                }).observe($('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last'), {childList: true, subtree: true});
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
+            }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+
+                // // Add Menu Toggle Frame
+                // $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
+                //
+                // // Trigger Initial Screen Changed
+                // document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
+                //
+                // // Add event for changing of the SCRN field
+                // new MutationObserver(() => {
+                //     // User changed screens, let the screen load and send
+                //     setTimeout(() => {
+                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
+                //     }, this.screenChangeDelay);
+                // }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+                //
+                // // Notify load is complete
+                // document.dispatchEvent(new Event('PrUnTools_Loaded'));
 
             //}, menuTimeout);
         }
