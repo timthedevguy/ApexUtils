@@ -76,7 +76,7 @@ class ApexUtils {
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
-            }).observe($('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last'), {childList: true, subtree: true});
+            }).observe($('DIV[class="vRC84tCrVmNxLdPLazT0o"]'), {childList: true, subtree: true});
 
                 // // Add Menu Toggle Frame
                 // $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
