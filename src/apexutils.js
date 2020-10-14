@@ -59,8 +59,8 @@ class ApexUtils {
             $('HEAD').append($('<LINK>').attr('href', 'https://www.binarymethod.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
             // Wait 5s for APEX to fully load
-            //setTimeout(() => {
-            new MutationObserver(() => {
+            setTimeout(() => {
+                // Add Menu Toggle Frame
                 $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
 
                 // Trigger Initial Screen Changed
@@ -76,26 +76,8 @@ class ApexUtils {
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
-            }).observe($('DIV[class="vRC84tCrVmNxLdPLazT0o"]'), {childList: true, subtree: true});
 
-                // // Add Menu Toggle Frame
-                // $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
-                //
-                // // Trigger Initial Screen Changed
-                // document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                //
-                // // Add event for changing of the SCRN field
-                // new MutationObserver(() => {
-                //     // User changed screens, let the screen load and send
-                //     setTimeout(() => {
-                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                //     }, this.screenChangeDelay);
-                // }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
-                //
-                // // Notify load is complete
-                // document.dispatchEvent(new Event('PrUnTools_Loaded'));
-
-            //}, menuTimeout);
+            }, menuTimeout);
         }
     }
 
