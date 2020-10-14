@@ -43,7 +43,7 @@ class ApexUtils {
      * Loads the PrUnTools Menu Block to the page
      * @param additionalStyles - Additional styles to add to the page
      */
-    load(additionalStyles='') {
+    load(menuTimeout=5000, additionalStyles='') {
 
         // Add new Styles
         if(additionalStyles != '') {
@@ -85,7 +85,7 @@ class ApexUtils {
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
 
-            }, 15000);
+            }, menuTimeout);
         }
     }
 
