@@ -60,6 +60,7 @@ class ApexUtils {
 
             // Wait 5s for APEX to fully load
             setTimeout(() => {
+
                 // Add Menu Toggle Frame
                 $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
 
@@ -67,12 +68,12 @@ class ApexUtils {
                 document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
 
                 // Add event for changing of the SCRN field
-                new MutationObserver(() => {
+                $('body').on('DOMSubtreeModified', 'SPAN[class^="HeadItem__label"]', () => {
                     // User changed screens, let the screen load and send
                     setTimeout(() => {
                         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
                     }, this.screenChangeDelay);
-                }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+                });
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
