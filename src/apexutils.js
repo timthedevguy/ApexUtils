@@ -68,19 +68,12 @@ class ApexUtils {
                 document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
 
                 // Add event for changing of the SCRN field
-                // $('body').on('DOMSubtreeModified', 'SPAN[class="rF4C15Dlkm60tt571SkDj"]', () => {
-                //     // User changed screens, let the screen load and send
-                //     setTimeout(() => {
-                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                //     }, this.screenChangeDelay);
-                // });
-
-                // new MutationObserver(() => {
-                //     // User changed screens, let the screen load and send
-                //     setTimeout(() => {
-                //         document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                //     }, this.screenChangeDelay);
-                // }).observe($('SPAN[class="rF4C15Dlkm60tt571SkDj"]'), {childList: true, subtree: true});
+                $('body').on('DOMSubtreeModified', 'SPAN[class^="HeadItem__label"]', () => {
+                    // User changed screens, let the screen load and send
+                    setTimeout(() => {
+                        document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
+                    }, this.screenChangeDelay);
+                });
 
                 // Notify load is complete
                 document.dispatchEvent(new Event('PrUnTools_Loaded'));
@@ -103,32 +96,6 @@ class ApexUtils {
      */
     set screenChangeDelay(delayInMilliseconds) {
         localStorage.setItem('screenChangeDelay', delayInMilliseconds);
-    }
-
-    /**
-     * Get an ApexUtils specific value from LocalStorage
-     * @param key - Key
-     * @returns {var} - Item
-     */
-    getValue(key) {
-        return localStorage.getItem('apexutils.'+key);
-    }
-
-    /**
-     * Set an ApexUtils specific value from LocalStorage
-     * @param key - Item Key
-     * @param value - Item
-     */
-    setValue(key, value) {
-        localStorage.setItem('apexutils.'+key, value);
-    }
-
-    /**
-     * Used for adding .on EventHandlers for dynamicly added Menu items
-     * @returns {string}
-     */
-    get menuAnchor() {
-        return '[class="_1M1EcDYyJhRT-bBiQgj4Zw"]';
     }
 
     /**
