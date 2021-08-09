@@ -56,7 +56,7 @@ class ApexUtils {
             $('BODY').addClass('PrUnTools');
 
             // Add Styles
-            $('HEAD').append($('<LINK>').attr('href', 'https://www.binarymethod.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
+            $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
             // Wait 5s for APEX to fully load
             setTimeout(() => {
