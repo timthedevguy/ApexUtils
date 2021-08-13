@@ -43,7 +43,7 @@ class ApexUtils {
      * Loads the PrUnTools Menu Block to the page
      * @param additionalStyles - Additional styles to add to the page
      */
-    load(menuTimeout=5000, additionalStyles='') {
+    load(additionalStyles='', menuTimeout=5000) {
 
         // Add new Styles
         if(additionalStyles != '') {
@@ -283,6 +283,46 @@ class ApexUtils {
                     <li>GitHub</li>
                 </ul>
             </div>`;
+    }
+
+    onBufferCreated(callback) {
+
+        let containerSelector = 'body';
+        let elementSelector = '._1T3GrusQ2ydTsNKeMaEfPl';
+
+        let onMutationsObserved = function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length) {
+                    var elements = $(mutation.addedNodes).find(elementSelector);
+                    for (var i = 0, len = elements.length; i < len; i++) {
+                        callback(elements[i]);
+                    }
+                }
+            });
+        };
+
+        let target = $(containerSelector)[0];
+        let config = { childList: true, subtree: true };
+        let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        let observer = new MutationObserver(onMutationsObserved);
+        observer.observe(target, config);
+    }
+
+    onScreenChange(callback) {
+
+        let elementSelector = '._24lAeqvUD4WLUdWUGCWeky';
+
+        let onMutationsObserved = function(mutations) {
+            mutations.forEach(function(mutation) {
+                callback();
+            });
+        };
+
+        let target = $(elementSelector)[0];
+        let config = { characterData: true, attributes: false, childList: false, subtree: true };
+        let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        let observer = new MutationObserver(onMutationsObserved);
+        observer.observe(target, config);
     }
 }
 
