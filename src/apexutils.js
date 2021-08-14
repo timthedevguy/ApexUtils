@@ -32,8 +32,12 @@ const alertTemplate = `
             </div>
         </div>
     `;
+const logoElement = '._2fyRVq2wB-JiJ3M4q1mEB';
 
 class ApexUtils {
+    #isLoaded;
+    #logoObserver;
+
     constructor() {
         if(this.screenChangeDelay == null) {
             this.screenChangeDelay = 750;
@@ -96,6 +100,14 @@ class ApexUtils {
      */
     set screenChangeDelay(delayInMilliseconds) {
         localStorage.setItem('screenChangeDelay', delayInMilliseconds);
+    }
+
+    get isLoaded() {
+        return this.#isLoaded;
+    }
+
+    set isLoaded(loaded) {
+        this.#isLoaded = loaded;
     }
 
     /**
@@ -344,6 +356,34 @@ class ApexUtils {
         let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
         let observer = new MutationObserver(onMutationsObserved);
         observer.observe(target, config);
+    }
+
+    onLoaded(callback) {
+
+        let onMutationsObserved = function(mutations) {
+            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+                if(!apex.isLoaded) {
+                    // Set loaded to true
+                    apex.isLoaded = true;
+                    // Disconnect the Observer
+                    apex.disconnect('logoObserver');
+                    // Perform callback
+                    callback();
+                }
+            }
+        };
+
+        let target = $(logoElement)[0];
+        let config = { characterData: false, attributes: true, childList: false, subtree: false, attributeFilter: ['class'] };
+        let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        this.#logoObserver = new MutationObserver(onMutationsObserved);
+        this.#logoObserver.observe(target, config);
+    }
+
+    disconnect(observerName) {
+        if(observerName === 'logoObserver') {
+            this.#logoObserver.disconnect();
+        }
     }
 }
 
