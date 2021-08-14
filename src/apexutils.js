@@ -332,7 +332,7 @@ class ApexUtils {
 
         let onMutationsObserved = function(mutations) {
             mutations.forEach(function(mutation) {
-                console.log(mutation);
+
                 if (mutation.addedNodes.length) {
                     callback();
                 }
