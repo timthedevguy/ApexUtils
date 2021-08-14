@@ -324,6 +324,27 @@ class ApexUtils {
         let observer = new MutationObserver(onMutationsObserved);
         observer.observe(target, config);
     }
+
+    onTileUpdate(callback) {
+
+        let containerSelector = '.OJocR3KT1lbvOOS1r8bq8';
+        let elementSelector = '._1h7jHHAYnTmdWfZvSkS4bo';
+
+        let onMutationsObserved = function(mutations) {
+            mutations.forEach(function(mutation) {
+                console.log(mutation);
+                if (mutation.addedNodes.length) {
+                    callback();
+                }
+            });
+        };
+
+        let target = $(containerSelector)[0];
+        let config = { childList: true, subtree: true };
+        let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        let observer = new MutationObserver(onMutationsObserved);
+        observer.observe(target, config);
+    }
 }
 
 const apex = new ApexUtils();
