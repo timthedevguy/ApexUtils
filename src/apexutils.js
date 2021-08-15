@@ -266,6 +266,10 @@ class ApexUtils {
         $(buffer).find('DIV[class^="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
     }
 
+    completeLoad() {
+        this.#monitorOnScreenChange();
+    }
+
     /**
      * Returns Help Text HTML
      * @returns {string}
@@ -376,7 +380,7 @@ class ApexUtils {
                     // Add Menu Toggle Frame
                     $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
 
-                    this.#monitorOnScreenChange();
+                    apex.completeLoad();
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
