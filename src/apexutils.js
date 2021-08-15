@@ -63,7 +63,6 @@ class ApexUtils {
             $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
             this.#monitorOnLoaded();
-            this.#monitorOnScreenChange();
 
             // Wait 5s for APEX to fully load
             /*setTimeout(() => {
@@ -376,6 +375,8 @@ class ApexUtils {
 
                     // Add Menu Toggle Frame
                     $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
+
+                    this.#monitorOnScreenChange();
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
