@@ -63,6 +63,7 @@ class ApexUtils {
             $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
             this.#monitorOnLoaded();
+            this.#monitorOnScreenChange();
 
             // Wait 5s for APEX to fully load
             /*setTimeout(() => {
@@ -322,14 +323,17 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    onScreenChange(callback) {
+    #monitorOnScreenChange() {
 
         let elementSelector = '._24lAeqvUD4WLUdWUGCWeky';
 
         let onMutationsObserved = function(mutations) {
-            //mutations.forEach(function(mutation) {
-                callback();
-            //});
+            document.dispatchEvent(new Event('PrUnTools_ScreenChange_Started'));
+            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+                document.dispatchEvent(new Event('PrUnTools_ScreenChange_Complete'));
+            } else {
+                setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
+            }
         };
 
         let target = $(elementSelector)[0];
@@ -369,8 +373,7 @@ class ApexUtils {
                     apex.isLoaded = true;
                     // Disconnect the Observer
                     apex.disconnect('logoObserver');
-                    // Perform callback
-                    //callback();
+
                     // Add Menu Toggle Frame
                     $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
