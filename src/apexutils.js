@@ -190,6 +190,7 @@ class ApexUtils {
     setMenuItemColor(id, color) {
         // Get Indicator object
         let indicator = $('#' + id).parent().children("DIV.PrUnTools_Menu_Item_Indicator")
+        $(indicator).attr('class', 'PrUnTools_Menu_Item_Indicator');
         indicator.addClass(color);
     }
 
