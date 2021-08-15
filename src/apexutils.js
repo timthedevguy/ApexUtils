@@ -269,6 +269,8 @@ class ApexUtils {
 
     completeLoad() {
         this.#monitorOnScreenChange();
+        this.#monitorOnTileUpdate();
+        this.#monitorOnBufferCreated();
     }
 
     /**
@@ -304,7 +306,7 @@ class ApexUtils {
             </div>`;
     }
 
-    onBufferCreated(callback) {
+    #monitorOnBufferCreated() {
 
         let containerSelector = 'body';
         let elementSelector = '._1T3GrusQ2ydTsNKeMaEfPl';
@@ -314,7 +316,7 @@ class ApexUtils {
                 if (mutation.addedNodes.length) {
                     var elements = $(mutation.addedNodes).find(elementSelector);
                     for (var i = 0, len = elements.length; i < len; i++) {
-                        callback(elements[i]);
+                        document.dispatchEvent(new Event('PrUnTools_BufferCreated'));
                     }
                 }
             });
@@ -347,18 +349,18 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    onTileUpdate(callback) {
+    #monitorOnTileUpdate() {
 
         let containerSelector = '.OJocR3KT1lbvOOS1r8bq8';
         let elementSelector = '._1h7jHHAYnTmdWfZvSkS4bo';
 
         let onMutationsObserved = function(mutations) {
-            mutations.forEach(function(mutation) {
 
-                if (mutation.addedNodes.length) {
-                    callback();
-                }
-            });
+            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+                document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
+            } else {
+                setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
+            }
         };
 
         let target = $(containerSelector)[0];
