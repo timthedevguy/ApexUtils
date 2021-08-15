@@ -62,6 +62,8 @@ class ApexUtils {
             // Add Styles
             $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
+            this.#monitorOnLoaded();
+
             // Wait 5s for APEX to fully load
             setTimeout(() => {
 
@@ -80,7 +82,7 @@ class ApexUtils {
                 });
 
                 // Notify load is complete
-                document.dispatchEvent(new Event('PrUnTools_Loaded'));
+                //document.dispatchEvent(new Event('PrUnTools_Loaded'));
 
             }, menuTimeout);
         }
@@ -358,7 +360,7 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    onLoaded(callback) {
+    #monitorOnLoaded() {
 
         let onMutationsObserved = function(mutations) {
             if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
@@ -368,7 +370,8 @@ class ApexUtils {
                     // Disconnect the Observer
                     apex.disconnect('logoObserver');
                     // Perform callback
-                    callback();
+                    //callback();
+                    document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
         };
