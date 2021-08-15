@@ -65,7 +65,7 @@ class ApexUtils {
             this.#monitorOnLoaded();
 
             // Wait 5s for APEX to fully load
-            setTimeout(() => {
+            /*setTimeout(() => {
 
                 // Add Menu Toggle Frame
                 $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
@@ -84,7 +84,7 @@ class ApexUtils {
                 // Notify load is complete
                 //document.dispatchEvent(new Event('PrUnTools_Loaded'));
 
-            }, menuTimeout);
+            }, menuTimeout);*/
         }
     }
 
@@ -371,6 +371,8 @@ class ApexUtils {
                     apex.disconnect('logoObserver');
                     // Perform callback
                     //callback();
+                    // Add Menu Toggle Frame
+                    $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
