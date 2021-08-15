@@ -325,13 +325,14 @@ class ApexUtils {
         let elementSelector = '._24lAeqvUD4WLUdWUGCWeky';
 
         let onMutationsObserved = function(mutations) {
-            mutations.forEach(function(mutation) {
+            //mutations.forEach(function(mutation) {
+                do{}while($($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub'))
                 callback();
-            });
+            //});
         };
 
         let target = $(elementSelector)[0];
-        let config = { characterData: true, attributes: false, childList: false, subtree: true };
+        let config = { characterData: true, attributes: false, childList: false, subtree: false };
         let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
         let observer = new MutationObserver(onMutationsObserved);
         observer.observe(target, config);
