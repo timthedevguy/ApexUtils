@@ -62,29 +62,8 @@ class ApexUtils {
             // Add Styles
             $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
+            // Setup On Loading monitor
             this.#monitorOnLoaded();
-
-            // Wait 5s for APEX to fully load
-            /*setTimeout(() => {
-
-                // Add Menu Toggle Frame
-                $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
-
-                // Trigger Initial Screen Changed
-                document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-
-                // Add event for changing of the SCRN field
-                $('body').on('DOMSubtreeModified', 'SPAN[class^="HeadItem__label"]', () => {
-                    // User changed screens, let the screen load and send
-                    setTimeout(() => {
-                        document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this.screenChangeDelay);
-                });
-
-                // Notify load is complete
-                //document.dispatchEvent(new Event('PrUnTools_Loaded'));
-
-            }, menuTimeout);*/
         }
     }
 
@@ -110,6 +89,14 @@ class ApexUtils {
 
     set isLoaded(loaded) {
         this.#isLoaded = loaded;
+    }
+
+    get isLoadingData() {
+        if($($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -268,12 +255,6 @@ class ApexUtils {
         $(buffer).find('DIV[class^="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
     }
 
-    completeLoad() {
-        this.#monitorOnScreenChange();
-        this.#monitorOnTileUpdate();
-        this.#monitorOnBufferCreated();
-    }
-
     /**
      * Returns Help Text HTML
      * @returns {string}
@@ -307,7 +288,7 @@ class ApexUtils {
             </div>`;
     }
 
-    #monitorOnBufferCreated() {
+    monitorOnBufferCreated() {
 
         let containerSelector = 'body';
         let elementSelector = '._1T3GrusQ2ydTsNKeMaEfPl';
@@ -330,7 +311,7 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    #monitorOnScreenChange() {
+    monitorOnScreenChange() {
 
         let elementSelector = '._24lAeqvUD4WLUdWUGCWeky';
 
@@ -350,18 +331,25 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    #monitorOnTileUpdate() {
+    monitorOnTileUpdate() {
 
         let containerSelector = '.OJocR3KT1lbvOOS1r8bq8';
         let elementSelector = '._1h7jHHAYnTmdWfZvSkS4bo';
 
         let onMutationsObserved = function(mutations) {
+            // if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+            //     console.log(mutations);
+            //     document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
+            // } else {
+            //     setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
+            // }
+            setTimeout(function(mutations) {
 
-            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
-                document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
-            } else {
-                setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
-            }
+                if(!apex.isLoadingData) {
+                    document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
+                }
+            }, 300);
+
         };
 
         let target = $(containerSelector)[0];
@@ -383,8 +371,7 @@ class ApexUtils {
 
                     // Add Menu Toggle Frame
                     $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
-
-                    apex.completeLoad();
+                    // Send Loaded Event
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
