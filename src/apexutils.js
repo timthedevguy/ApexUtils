@@ -113,6 +113,7 @@ class ApexUtils {
     }
 
     /**
+    /**
      * Gets the NEXT STATE information from the Redux Store
      * @returns {*} - JSON Object containing State information
      */
