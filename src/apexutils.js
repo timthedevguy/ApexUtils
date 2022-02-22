@@ -32,16 +32,13 @@ const alertTemplate = `
             </div>
         </div>
     `;
-const logoElement = '._2fyRVq2wB-JiJ3M4q1mEB';
+const logoElement = '.JWoFGgEPrdT6JShoeS0\\+Ag\\=\\=';
 
 class ApexUtils {
-    #isLoaded;
-    #logoObserver;
+    logoObserver = new MutationObserver(function(){});
 
     constructor() {
-        if(this.screenChangeDelay == null) {
-            this.screenChangeDelay = 750;
-        }
+        this.loaded = false;
     }
     /**
      * Loads the PrUnTools Menu Block to the page
@@ -62,56 +59,31 @@ class ApexUtils {
             // Add Styles
             $('HEAD').append($('<LINK>').attr('href', 'https://timthedevguy.com/apexutils/apexutils_styles.min.css').attr('rel', 'stylesheet'));
 
-            this.#monitorOnLoaded();
+            setTimeout(function() {
+                apex.monitorOnLoaded();
+            }, 3000);
+            // Setup On Loading monitor
 
-            // Wait 5s for APEX to fully load
-            /*setTimeout(() => {
-
-                // Add Menu Toggle Frame
-                $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
-
-                // Trigger Initial Screen Changed
-                document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-
-                // Add event for changing of the SCRN field
-                $('body').on('DOMSubtreeModified', 'SPAN[class^="HeadItem__label"]', () => {
-                    // User changed screens, let the screen load and send
-                    setTimeout(() => {
-                        document.dispatchEvent(new Event('PrUnTools_ScreenChanged'));
-                    }, this.screenChangeDelay);
-                });
-
-                // Notify load is complete
-                //document.dispatchEvent(new Event('PrUnTools_Loaded'));
-
-            }, menuTimeout);*/
         }
     }
 
-    /**
-     * Gets Screen Change detection delay in milliseconds, default is 750
-     * @returns {number}
-     */
-    get screenChangeDelay() {
-        return localStorage.getItem('screenChangeDelay');
-    }
-
-    /**
-     * Sets Screen Change detection delay in milliseconds, default is 750
-     * @param delayInMilliseconds - New delay value
-     */
-    set screenChangeDelay(delayInMilliseconds) {
-        localStorage.setItem('screenChangeDelay', delayInMilliseconds);
-    }
-
     get isLoaded() {
-        return this.#isLoaded;
+        return this.loaded;
     }
 
     set isLoaded(loaded) {
-        this.#isLoaded = loaded;
+        this.loaded = loaded;
     }
 
+    get isLoadingData() {
+        if($($(logoElement)[0]).hasClass('iydywTEIjthCtOf0nolVCQ==')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
     /**
      * Gets the NEXT STATE information from the Redux Store
      * @returns {*} - JSON Object containing State information
@@ -206,26 +178,29 @@ class ApexUtils {
     showBuffer(title, subtitle, width, height, content) {
         // Create new Buffer
         //$('[class^="Dock__create__"]').click();
-        $('[class="_38GFUZ_bqqfSehlTdlvwGE _2tgF3CjTxcwKdSpZ_motdg _33A_5lETf4HBqwJi_q-jhZ _1vWRpdI8cKNMPyOPnzlXgX"]').click();
+        $('#TOUR_TARGET_BUTTON_BUFFER_NEW').click();
 
         // Find the new Buffer
-        let buffer = $('DIV[class="_1Gt2vj54dwdsGZMO13RxjN"]:not(".PrUnTools_taken") DIV[class="_86iI4sy8I8Gb9DRZloqFB"]:first').parent().parent().parent().addClass('PrUnTools_taken');
+        //let buffer = $('DIV[class="_1Gt2vj54dwdsGZMO13RxjN"]:not(".PrUnTools_taken") DIV[class="_86iI4sy8I8Gb9DRZloqFB"]:first').parent().parent().parent().addClass('PrUnTools_taken');
+        let buffer = $('#TOUR_TARGET_EMPTY_BUFFER:not(.PrUnTools_taken):first').addClass("PrUnTools_taken");
 
         // Remove the buffer input stuff
-        $(buffer).find('DIV[class="_86iI4sy8I8Gb9DRZloqFB"]').remove();
-        $(buffer).find('DIV[class="_1mubANzqV2fICrNGnMze0y"]').remove();
+        //$(buffer).find('DIV[class="_86iI4sy8I8Gb9DRZloqFB"]').remove();
+        //$(buffer).find('DIV[class="_1mubANzqV2fICrNGnMze0y"]').remove();
+
 
         // Remove minimize button
-        $(buffer).find('SPAN[class="_3pd4GjlRDJtIK4izuUrc2Q BNTJu1og0XIu3K26V_ddU _33A_5lETf4HBqwJi_q-jhZ _2_LtsZLiGIKxWd_UHEKnY6"]').remove();
+        //$(buffer).find('SPAN[class="_3pd4GjlRDJtIK4izuUrc2Q BNTJu1og0XIu3K26V_ddU _33A_5lETf4HBqwJi_q-jhZ _2_LtsZLiGIKxWd_UHEKnY6"]').remove();
 
         // Build the title and frame
         let bufferFrame = bufferTemplate.replace('{{:title}}',title).replace('{{:subtitle}}',subtitle).replace('{{:content}}', content);
 
         // Set window size
-        $(buffer).find('DIV[class="_1T3GrusQ2ydTsNKeMaEfPl"]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
+        $(buffer).find('DIV[class="_1fygCuy4MXc3okBz3qYOdw\\=\\="]').attr('style','position: relative; user-select: auto; width: ' + width + 'px; height: ' + height + 'px; box-sizing: border-box;')
 
         // Add Frame
-        $(buffer).find('DIV[class="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
+        //$(buffer).find('DIV[class="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
+        $(buffer).find('#TOUR_TARGET_EMPTY_TILE').html(bufferFrame);
     }
 
     /**
@@ -267,12 +242,6 @@ class ApexUtils {
         $(buffer).find('DIV[class^="_2-M8WlI-JS7ws_xSL-0yYo"]').append($(bufferFrame));
     }
 
-    completeLoad() {
-        this.#monitorOnScreenChange();
-        this.#monitorOnTileUpdate();
-        this.#monitorOnBufferCreated();
-    }
-
     /**
      * Returns Help Text HTML
      * @returns {string}
@@ -306,10 +275,10 @@ class ApexUtils {
             </div>`;
     }
 
-    #monitorOnBufferCreated() {
+    monitorOnBufferCreated() {
 
         let containerSelector = 'body';
-        let elementSelector = '._1T3GrusQ2ydTsNKeMaEfPl';
+        let elementSelector = '._8RTWQyDDvco1YEMU0yd0ag\\=\\=';
 
         let onMutationsObserved = function(mutations) {
             mutations.forEach(function(mutation) {
@@ -329,13 +298,13 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    #monitorOnScreenChange() {
+    monitorOnScreenChange() {
 
-        let elementSelector = '._24lAeqvUD4WLUdWUGCWeky';
+        let elementSelector = '._00nZwVF0HWBYVHUWgUmkGw\\=\\=';
 
         let onMutationsObserved = function(mutations) {
             document.dispatchEvent(new Event('PrUnTools_ScreenChange_Started'));
-            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+            if(!$($(logoElement)[0]).hasClass('iydywTEIjthCtOf0nolVCQ==')) {
                 document.dispatchEvent(new Event('PrUnTools_ScreenChange_Complete'));
             } else {
                 setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
@@ -349,18 +318,25 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    #monitorOnTileUpdate() {
+    monitorOnTileUpdate() {
 
-        let containerSelector = '.OJocR3KT1lbvOOS1r8bq8';
-        let elementSelector = '._1h7jHHAYnTmdWfZvSkS4bo';
+        let containerSelector = '.yC8X0vUOtId9OdarJ-Gxvg\\=\\=';
+        let elementSelector = '._2ELYlP31j95Y98WT6zodUQ\\=\\=';
 
         let onMutationsObserved = function(mutations) {
+            // if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+            //     console.log(mutations);
+            //     document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
+            // } else {
+            //     setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
+            // }
+            setTimeout(function(mutations) {
 
-            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
-                document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
-            } else {
-                setTimeout(onMutationsObserved, 300); // try again in 300 milliseconds
-            }
+                if(!apex.isLoadingData) {
+                    document.dispatchEvent(new Event('PrUnTools_TileUpdate'));
+                }
+            }, 300);
+
         };
 
         let target = $(containerSelector)[0];
@@ -370,20 +346,22 @@ class ApexUtils {
         observer.observe(target, config);
     }
 
-    #monitorOnLoaded() {
+    monitorOnLoaded() {
 
         let onMutationsObserved = function(mutations) {
-            if(!$($(logoElement)[0]).hasClass('_9loCuZeuQgJye2371syub')) {
+            if(!$($(logoElement)[0]).hasClass('.iydywTEIjthCtOf0nolVCQ==')) {
                 if(!apex.isLoaded) {
                     // Set loaded to true
                     apex.isLoaded = true;
                     // Disconnect the Observer
                     apex.disconnect('logoObserver');
+                    apex.monitorOnScreenChange();
+                    apex.monitorOnBufferCreated();
+                    apex.monitorOnTileUpdate();
 
                     // Add Menu Toggle Frame
-                    $('[class="_1M1EcDYyJhRT-bBiQgj4Zw"] DIV[class="vRC84tCrVmNxLdPLazT0o"]:last').after($(menuTemplate));
-
-                    apex.completeLoad();
+                    $('DIV[id="TOUR_TARGET_SIDEBAR_LEFT_02"]:last').after($(menuTemplate));
+                    // Send Loaded Event
                     document.dispatchEvent(new Event('PrUnTools_Loaded'));
                 }
             }
@@ -392,16 +370,16 @@ class ApexUtils {
         let target = $(logoElement)[0];
         let config = { characterData: false, attributes: true, childList: false, subtree: false, attributeFilter: ['class'] };
         let MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-        this.#logoObserver = new MutationObserver(onMutationsObserved);
-        this.#logoObserver.observe(target, config);
+        this.logoObserver = new MutationObserver(onMutationsObserved);
+        this.logoObserver.observe(target, config);
     }
 
     disconnect(observerName) {
         if(observerName === 'logoObserver') {
-            this.#logoObserver.disconnect();
+            this.logoObserver.disconnect();
         }
     }
 }
 
 const apex = new ApexUtils();
-Object.freeze(apex);
+//Object.freeze(apex);
